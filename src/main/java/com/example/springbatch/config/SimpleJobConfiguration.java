@@ -4,8 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,16 +28,18 @@ public class SimpleJobConfiguration {
 
     @Bean
     public Job simpleJob() {
-        return jobBuilderFactory.get("simpleJob")       // `simpleJob`이란 이름의 Batch Job 생성
-            .start(simpleStep())
+        return jobBuilderFactory.get("simpleJob")
+            .start(simpleStep(null))
             .build();
     }
 
     @Bean
-    public Step simpleStep() {
-        return stepBuilderFactory.get("simpleStep")     // `simpleStep`이란 이름의 Batch Step 생성
-            .tasklet((contribution, chunkContext) -> {  // Tasklet 또는 Reader-Processor-Writer 활용
+    @JobScope
+    public Step simpleStep(@Value("#{jobParameters[date]}") String date) {
+        return stepBuilderFactory.get("simpleStep")
+            .tasklet((contribution, chunkContext) -> {
                 log.info("🙌 This is Simple Step");
+                log.info("🙌 date = {}", date);
 
                 return RepeatStatus.FINISHED;
             })
