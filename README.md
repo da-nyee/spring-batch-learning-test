@@ -4,8 +4,13 @@ Spring Batch 학습 테스트를 위한 저장소
 <br/>
 
 ## Notes
+### 1.
 - JobParameters에 사용할 수 있는 자료형은 <b>Long, Double, String, Date</b>이다.
 - 아쉽게도 LocalDate, LocalDateTime은 지원하지 않아, String으로 받아 형변환을 해야 한다.
+
+### 2.
+- <b>Chunk Size</b>는 <b>한번에 처리되는 트랜잭션 단위</b>이다.
+- <b>Page Size</b>는 <b>한번에 조회되는 데이터 양</b>이다.
 
 <br/>
 
