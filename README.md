@@ -4,8 +4,8 @@ Spring Batch 학습 테스트를 위한 저장소
 <br/>
 
 ## Notes
-- JobParameters로 사용할 수 있는 자료형은 <b>Long, Double, String, Date</b>이다.
-- 아쉽게도 LocalDate, LocalDateTime은 지원하지 않는다. 따라서, String으로 받아 형변환을 해야 한다.
+- JobParameters에 사용할 수 있는 자료형은 <b>Long, Double, String, Date</b>이다.
+- 아쉽게도 LocalDate, LocalDateTime은 지원하지 않아, String으로 받아 형변환을 해야 한다.
 
 <br/>
 
